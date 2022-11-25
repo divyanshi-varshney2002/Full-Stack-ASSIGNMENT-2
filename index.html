@@ -136,7 +136,6 @@
       <input type="radio" id="yellow" name="theme" />
       <input type="radio" id="green" name="theme" />
     </form>
-
     <article id="m" class="box"></article>
     <script>
       themes = document.querySelectorAll('[name="theme"]');
@@ -155,9 +154,7 @@
         });
       }
       document.onload = apply();
-
       document.getElementById("sh").addEventListener("click", display);
-
       function display() {
         var v = document.getElementById("search").value;
         reqee(v);

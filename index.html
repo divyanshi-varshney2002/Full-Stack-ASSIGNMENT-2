@@ -74,15 +74,15 @@
       }
       :root:has(#blue:checked) {
         background-color: lightblue;
-        --heading:rgb(29, 29, 116);
+        --heading: rgb(29, 29, 116);
       }
       :root:has(#pink:checked) {
         background-color: pink;
-        --heading:rgb(142, 24, 134);
+        --heading: rgb(142, 24, 134);
       }
       :root:has(#light:checked) {
         background-color: rgb(110, 110, 110);
-        --heading:white;
+        --heading: white;
       }
       :root:has(#yellow:checked) {
         background-color: yellow;
@@ -90,15 +90,25 @@
       }
       :root:has(#green:checked) {
         background-color: rgb(45, 177, 45);
-        --heading:rgb(19, 70, 19);
+        --heading: rgb(19, 70, 19);
       }
       body {
         background-color: var(--radio-color);
       }
-      img{
-    height: 100%;
-    width: 100%;
- }
+      .mov {
+        height: 200px;
+        width: 150px;
+      }
+      img {
+        height: 100%;
+        width: 100%;
+      }
+      article {
+        padding: 20px;
+        border: 3px solid var(--bc);
+        display: flex;
+        flex-wrap: wrap;
+      }
     </style>
   </head>
   <body>
@@ -122,12 +132,12 @@
     <form action="" class="themechange">
       <input type="radio" id="light" name="theme" />
       <input type="radio" id="blue" name="theme" />
-      <input type="radio" id="pink" name="theme" checked/>
+      <input type="radio" id="pink" name="theme" checked />
       <input type="radio" id="yellow" name="theme" />
       <input type="radio" id="green" name="theme" />
     </form>
-    
-    <div class="box"></div>
+
+    <article id="m" class="box"></article>
     <script>
       themes = document.querySelectorAll('[name="theme"]');
       themes.forEach((theme) => {
@@ -146,40 +156,34 @@
       }
       document.onload = apply();
 
-      document.getElementById('sh').addEventListener("click",display);
+      document.getElementById("sh").addEventListener("click", display);
 
-function display(){
-    var v=document.getElementById('search').value;
-    reqee(v);
-}
-var data;
-function reqee(s){
-    const url="https://api.tvmaze.com/search/shows?q=";
-    const my=new XMLHttpRequest;
-    my.onload=function(){
-        var c=document.getElementById('m');
-        data=JSON.parse(this.response);
-        data.forEach((d)=>{
+      function display() {
+        var v = document.getElementById("search").value;
+        reqee(v);
+      }
+      var data;
+      function reqee(s) {
+        const url = "https://api.tvmaze.com/search/shows?q=";
+        const my = new XMLHttpRequest();
+        my.onload = function () {
+          var c = document.getElementById("m");
+          data = JSON.parse(this.response);
+          data.forEach((d) => {
             console.log(d.show.image.original);
-            var im=d.show.image.original;
-            var div=document.createElement('div');
-        // c.appendChild(div);
-        div.className='mov';
-        div.innerHTML=`<img src="${im}" alt="">`;
-        c.appendChild(div);
-        })
-        // console.log(data);
-        
-        
-        
-    }
-    my.onerror=function(){
-        console.log('error');
-    }
-    my.open("GET",url+s);
-    my.send();
-    
-}
+            var im = d.show.image.original;
+            var div = document.createElement("div");
+            div.className = "mov";
+            div.innerHTML = `<img src="${im}" alt="">`;
+            c.appendChild(div);
+          });
+        };
+        my.onerror = function () {
+          console.log("error");
+        };
+        my.open("GET", url + s);
+        my.send();
+      }
     </script>
   </body>
 </html>

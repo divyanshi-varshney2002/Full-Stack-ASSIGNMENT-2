@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyanshi Varshney 201500233</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+        h1{
+            text-decoration: underline;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        .box{
+            padding: 30px 0px;
+            border: 3px solid rgba(128, 128, 128, 0.819);
+            margin: 20px;
+            width: 70%;
+        }
+        .searchbox{
+            font-size: 25px;
+        }
+        .themechange {
+            background-color: white;
+        width: fit-content;
+        padding: 20px;
+        border-radius: 0px 0px 30% 30%;
+      }
+      form{
+        border: 2px solid white;
+        padding: 15px 25px;
+      }
+      input[type="radio"]:checked {
+        background-color: var(--radio-color);
+      }
+      input[type="radio"] {
+        appearance: none;
+        height: 1.5rem;
+        width: 1.5rem;
+        padding: 15px ;
+        margin: 5px;
+        border: 2px solid var(--radio-color);
+        border-radius: 50%;
+      }
+      #pink {
+        --radio-color: rgb(233, 46, 155);
+      }
+      #light {
+        --radio-color: rgb(252, 9, 53);
+      }
+      #blue {
+        --radio-color: lightblue;
+      }
+      #yellow {
+        --radio-color: rgb(229, 229, 49);
+      }
+      #green {
+        --radio-color: rgb(19, 177, 42);
+      }
+      :root:has(#blue:checked) {
+        background-color: lightblue;
+      }
+      :root:has(#pink:checked) {
+        background-color: pink;
+      }
+      :root:has(#light:checked) {
+        background-color: red;
+      }
+      :root:has(#yellow:checked) {
+        background-color: yellow;
+      }
+      :root:has(#green:checked) {
+        background-color: green;
+      }
+      body {
+        background-color: var(--radio-color);
+      }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>SEARCH YOUR FAVOURITE MOVIES</h1>
+        <input type="text" class="searchbox" id="search" placeholder="Search here.." onkeyup="search()"/>
+        <input type="submit" class="searchbox" value="Search" onclick="search()"/>
+    </div>
+    <form action="" class="themechange">
+            <input type="radio" id="light" name="theme" />
+            <input type="radio" id="blue" name="theme" />
+            <input type="radio" id="pink" name="theme" />
+            <input type="radio" id="yellow" name="theme" />
+            <input type="radio" id="green" name="theme" />
+      </form>
+      <script>
+        themes = document.querySelectorAll('[name="theme"]');
+      themes.forEach((theme) => {
+        theme.addEventListener("click", () => store(theme));
+      });
+      function store(theme) {
+        localStorage.setItem("theme", theme.id);
+      }
+      function apply() {
+        storedtheme = localStorage.getItem("theme");
+        themes.forEach((theme) => {
+          if (theme.id === storedtheme) {
+            theme.checked = true;
+          }
+        });
+      }
+      document.onload = apply();
+      </script>
+</body>
+</html>

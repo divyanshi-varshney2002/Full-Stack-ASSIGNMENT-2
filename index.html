@@ -95,6 +95,10 @@
       body {
         background-color: var(--radio-color);
       }
+      img{
+    height: 100%;
+    width: 100%;
+ }
     </style>
   </head>
   <body>
@@ -121,6 +125,8 @@
       <input type="radio" id="yellow" name="theme" />
       <input type="radio" id="green" name="theme" />
     </form>
+    
+    <div class="box"></div>
     <script>
       themes = document.querySelectorAll('[name="theme"]');
       themes.forEach((theme) => {
@@ -138,7 +144,36 @@
         });
       }
       document.onload = apply();
+
+      document.getElementById('sh').addEventListener("click",display);
+
+function display(){
+    var v=document.getElementById('search').value;
+    requesteee(v);
+}
+var data;
+function requeteee(s){
+    const url="https://api.tvmaze.com/search/shows?q=";
+    const my=new XMLHttpRequest;
+    my.onload=function(){
+        data=this.response;
+        // data.forEach((d)=>{
+        //     console.log(data);
+        // })
+        console.log(data);
+        var c=document.getElementById('m');
+        var div=document.createElement('div');
+        c.appendChild(div);
+        div.className='mov';
+        
+    }
+    my.onerror=function(){
+        console.log('error');
+    }
+    my.open("GET",url+s);
+    my.send();
+    
+}
     </script>
-    <div class="box"></div>
   </body>
 </html>
